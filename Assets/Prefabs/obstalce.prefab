@@ -126,13 +126,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleSprites:
-  - {fileID: 21300000, guid: 87b3b8bbc7f5640b4ac1075d962fe75b, type: 3}
-  - {fileID: 21300000, guid: b212c0cd6075d42678b823225ef0b4ba, type: 3}
-  - {fileID: 21300000, guid: f340ca2586c514890b9634f508230830, type: 3}
-  - {fileID: 21300000, guid: 62d68dcc9f3d0487ba2769154b99dd71, type: 3}
-  - {fileID: 21300000, guid: 3bc3ee1dfadcc4af7afbd8f94e370dac, type: 3}
-  - {fileID: 21300000, guid: b859a307f87c74c8ba5dacd291fe27b2, type: 3}
-  - {fileID: 21300000, guid: 727dc5bc960f048528ce2d164948cdb5, type: 3}
+  - {fileID: -646838714, guid: 7d4d692b4b45ba9408764617a0fd7fff, type: 3}
+  - {fileID: -1535519600, guid: 7d4d692b4b45ba9408764617a0fd7fff, type: 3}
+  - {fileID: 650918317, guid: 7d4d692b4b45ba9408764617a0fd7fff, type: 3}
+  - {fileID: 992227388, guid: 7d4d692b4b45ba9408764617a0fd7fff, type: 3}
+  - {fileID: 118735313, guid: 7d4d692b4b45ba9408764617a0fd7fff, type: 3}
+  - {fileID: -1757112054, guid: 7d4d692b4b45ba9408764617a0fd7fff, type: 3}
+  - {fileID: 333604285, guid: 7d4d692b4b45ba9408764617a0fd7fff, type: 3}
   initialScale: 1
   minScale: 1
   maxScale: 1
