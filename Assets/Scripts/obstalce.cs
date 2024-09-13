@@ -22,7 +22,7 @@ public class Obstacle : MonoBehaviour
     public float switchInterval = 1f; // Time interval between lane switches
     public float laneSwitchSpeed = 10f; // Speed of switching lanes
     private float switchTimer;
-    private float[] lanePositions = { -3.8f, -1.3f, 1.2f, 3.8f }; // X positions of lanes
+    private float[] lanePositions = { -5.69f, -4.54f, -3.24f, -2.26f }; // X positions of lanes
     private int currentLane;
 
     // Methods
