@@ -40,22 +40,26 @@ public class PlayerMovement : MonoBehaviour
         //move left
         if(Input.GetKey(KeyCode.A))
         {
+            _animator.SetBool("moveLeft", true);
             moveSpeedLeft = Mathf.Min(moveSpeedLeft + accelerationRate * Time.deltaTime, maxSpeed);
             rb.AddForce(Vector2.left * moveSpeedLeft * Time.deltaTime, ForceMode2D.Impulse);
         }
         else if(Input.GetKeyUp(KeyCode.A))
         {
+            _animator.SetBool("moveLeft", false);
             moveSpeedLeft = defaultSpeed;
         }
 
         //move right
         if (Input.GetKey(KeyCode.D))
         {
+            _animator.SetBool("moveRight", true);
             moveSpeedRight = Mathf.Min(moveSpeedRight + accelerationRate * Time.deltaTime, maxSpeed);
             rb.AddForce(Vector2.right * moveSpeedRight * Time.deltaTime, ForceMode2D.Impulse);
         }
         else if(Input.GetKeyUp(KeyCode.D))
         {
+            _animator.SetBool("moveRight", false);
             moveSpeedRight = defaultSpeed;
         }
 

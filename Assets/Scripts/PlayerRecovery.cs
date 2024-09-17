@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerRecovery : MonoBehaviour
 {
-    public float maxCharacterHeight = -2.5f;
+    public float maxCharacterHeight = 1f;
     public float recoverySpeed = 3f;
     public float cooldownTime = 5f;
 

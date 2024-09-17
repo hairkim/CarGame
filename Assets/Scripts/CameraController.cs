@@ -9,7 +9,6 @@ public class CameraController : MonoBehaviour
     public GameController gameController;
 
     public Transform player;
-    public float playerYPos = -1f;
     public LayerMask cameraLayer;
 
     private void Start()
@@ -22,7 +21,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
 
-        if (transform.position.y <= playerYPos)
+        if (transform.position.y <= player.position.y)
         {
             Vector2 rayDirection;
             if(PlayerMovement.instance.isFacingLeft)
