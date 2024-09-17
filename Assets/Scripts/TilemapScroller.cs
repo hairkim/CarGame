@@ -8,6 +8,7 @@ public class TilemapScroller : MonoBehaviour
     public float maxScrollSpeed = 2f; // Maximum speed
     public float delay = 10f; // Time it takes to reach max speed
     public Vector2 tileSize; // Size of your background tile in Unity units
+    public float tileYOffset;
 
     private Vector3 startPosition;
     private float scrollSpeed;
@@ -34,7 +35,7 @@ public class TilemapScroller : MonoBehaviour
         scrollSpeed = Mathf.Clamp(increaseScrollSpeed, minScrollSpeed, maxScrollSpeed);
 
         // Calculate the new Y position for vertical scrolling
-        float newPositionY = Mathf.Repeat(Time.time * scrollSpeed, tileSize.y);
+        float newPositionY = Mathf.Repeat(Time.time * scrollSpeed, tileSize.y + tileYOffset);
         
         // Move the tilemap vertically for scrolling effect
         transform.position = startPosition + Vector3.down * newPositionY;
