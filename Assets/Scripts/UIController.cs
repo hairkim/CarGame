@@ -14,6 +14,9 @@ public class UIController : MonoBehaviour
     //this is for the game score
     public TMP_Text gameScore;
 
+    public Animator titleAnimator;
+    public Animator backgroundAnimator;
+
 
     //true = started, false = ended
     public static string gameStatus;
@@ -45,6 +48,8 @@ public class UIController : MonoBehaviour
             gameOverScreen.SetActive(false);
             gameScore.gameObject.SetActive(false);
             Time.timeScale = 0;
+            titleAnimator.Play("titleAnim");
+            //StartCoroutine(PlayTitleAnimation());
         }
         Debug.Log("Current high score: " + PlayerPrefs.GetFloat("HighScore", 0f).ToString());
     }
@@ -107,7 +112,7 @@ public class UIController : MonoBehaviour
         uiElements.SetActive(false);
 
         Animator animator = newspaperImage.GetComponent<Animator>();
-        if(animator != null)
+        if (animator != null)
         {
             animator.SetTrigger("ShowNewspaper");
             StartCoroutine(WaitForAnimation(animator, "NewspaperAnimator"));
@@ -120,12 +125,27 @@ public class UIController : MonoBehaviour
         {
             yield return null;
         }
-        while(animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
         {
             yield return null;
         }
 
         uiElements.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    public IEnumerator PlayTitleAnimation()
+    {
+        while(true) {
+            // Play the animation
+            titleAnimator.Play("titleAnim");
+            //Debug.Log(titleAnimator.GetCurrentAnimatorStateInfo(0).length);
+
+            // Wait for the animation to finish (assuming animation length is 1 second, replace with actual length if different)
+            yield return new WaitForSecondsRealtime(1f);
+
+            // Wait for an additional 0.5 seconds before replaying
+            yield return new WaitForSecondsRealtime(0.5f);
+        }
     }
 }

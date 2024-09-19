@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement instance;
     public UIController uiController;
+    public GameController gameController;
 
     Rigidbody2D rb;
     Animator _animator;
@@ -104,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        gameController.checkHighScore();
         uiController.GameOver();
     }
 }
