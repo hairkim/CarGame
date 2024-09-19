@@ -45,6 +45,7 @@ public class UIController : MonoBehaviour
             gameScore.gameObject.SetActive(false);
             Time.timeScale = 0;
             titleAnimator.Play("titleAnim");
+            backgroundAnimator.Play("backgroundAnimation");
         }
         Debug.Log("Current high score: " + PlayerPrefs.GetFloat("HighScore", 0f).ToString());
     }
