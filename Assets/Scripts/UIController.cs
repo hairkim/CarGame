@@ -7,18 +7,12 @@ using TMPro;
 public class UIController : MonoBehaviour
 {
     public TMP_Text highScoreText;
-
-    //this is for game over screen
-    public TMP_Text scoreText;
-
-    //this is for the game score
-    public TMP_Text gameScore;
+    public TMP_Text scoreText; // For the game over screen score display
+    public TMP_Text gameScore; // For the in-game score display
 
     public Animator titleAnimator;
     public Animator backgroundAnimator;
 
-
-    //true = started, false = ended
     public static string gameStatus;
     public static float finalScore;
 
@@ -28,6 +22,8 @@ public class UIController : MonoBehaviour
 
     public GameObject newspaperImage;
     public GameObject uiElements;
+
+    private float animationDuration = 1.0f; // Duration for the score animation
 
     void Start()
     {
@@ -49,7 +45,6 @@ public class UIController : MonoBehaviour
             gameScore.gameObject.SetActive(false);
             Time.timeScale = 0;
             titleAnimator.Play("titleAnim");
-            //StartCoroutine(PlayTitleAnimation());
         }
         Debug.Log("Current high score: " + PlayerPrefs.GetFloat("HighScore", 0f).ToString());
     }
@@ -66,7 +61,6 @@ public class UIController : MonoBehaviour
 
         gameScore.text = Mathf.FloorToInt(GameController.score).ToString();
     }
-
 
     public void StartGame()
     {
@@ -105,8 +99,11 @@ public class UIController : MonoBehaviour
 
     public void GameOver()
     {
-        scoreText.text = Mathf.FloorToInt(finalScore).ToString();
+        // Start the score animation coroutine
+
+        // Display high score immediately
         highScoreText.text = Mathf.FloorToInt(PlayerPrefs.GetFloat("HighScore", 0f)).ToString();
+
         gameScore.gameObject.SetActive(false);
         gameOverScreen.SetActive(true);
         uiElements.SetActive(false);
@@ -117,6 +114,8 @@ public class UIController : MonoBehaviour
             animator.SetTrigger("ShowNewspaper");
             StartCoroutine(WaitForAnimation(animator, "NewspaperAnimator"));
         }
+
+
     }
 
     private IEnumerator WaitForAnimation(Animator animator, string animationName)
@@ -131,21 +130,27 @@ public class UIController : MonoBehaviour
         }
 
         uiElements.SetActive(true);
-        Time.timeScale = 0;
+
+        StartCoroutine(AnimateScore(finalScore));
+
     }
 
-    public IEnumerator PlayTitleAnimation()
+    // Coroutine to animate the score from 0 to the final score
+    private IEnumerator AnimateScore(float finalScore)
     {
-        while(true) {
-            // Play the animation
-            titleAnimator.Play("titleAnim");
-            //Debug.Log(titleAnimator.GetCurrentAnimatorStateInfo(0).length);
+        float elapsedTime = 0f;
+        float currentScore = 0f;
 
-            // Wait for the animation to finish (assuming animation length is 1 second, replace with actual length if different)
-            yield return new WaitForSecondsRealtime(1f);
-
-            // Wait for an additional 0.5 seconds before replaying
-            yield return new WaitForSecondsRealtime(0.5f);
+        while (elapsedTime < animationDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            currentScore = Mathf.Lerp(0, finalScore, elapsedTime / animationDuration);
+            scoreText.text = Mathf.FloorToInt(currentScore).ToString(); // Update score text as it increments
+            yield return null;
         }
+
+        // Ensure final score is displayed at the end of the animation
+        scoreText.text = Mathf.FloorToInt(finalScore).ToString();
+        Time.timeScale = 0;
     }
 }
