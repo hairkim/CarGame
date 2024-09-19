@@ -34,6 +34,7 @@ public class UIController : MonoBehaviour
             pauseScreen.SetActive(false);
             gameOverScreen.SetActive(false);
             uiElements.SetActive(false);
+            gameScore.gameObject.SetActive(false);
             Time.timeScale = 1;
             gameStatus = "Playing";
         }
@@ -42,6 +43,7 @@ public class UIController : MonoBehaviour
             startScreen.SetActive(true);
             pauseScreen.SetActive(false);
             gameOverScreen.SetActive(false);
+            gameScore.gameObject.SetActive(false);
             Time.timeScale = 0;
         }
         Debug.Log("Current high score: " + PlayerPrefs.GetFloat("HighScore", 0f).ToString());
@@ -66,6 +68,7 @@ public class UIController : MonoBehaviour
         Debug.Log("Button Clicked!");
         Time.timeScale = 1;
         startScreen.SetActive(false);
+        gameScore.gameObject.SetActive(true);
         gameStatus = "Playing";
     }
 
