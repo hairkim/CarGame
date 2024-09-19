@@ -34,7 +34,7 @@ public class UIController : MonoBehaviour
             pauseScreen.SetActive(false);
             gameOverScreen.SetActive(false);
             uiElements.SetActive(false);
-            gameScore.gameObject.SetActive(false);
+            gameScore.gameObject.SetActive(true);
             Time.timeScale = 1;
             gameStatus = "Playing";
         }
@@ -104,6 +104,7 @@ public class UIController : MonoBehaviour
         highScoreText.text = Mathf.FloorToInt(PlayerPrefs.GetFloat("HighScore", 0f)).ToString();
         gameScore.gameObject.SetActive(false);
         gameOverScreen.SetActive(true);
+        uiElements.SetActive(false);
 
         Animator animator = newspaperImage.GetComponent<Animator>();
         if(animator != null)
