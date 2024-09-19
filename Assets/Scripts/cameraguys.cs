@@ -8,12 +8,14 @@ public class cameraguys : MonoBehaviour
     Rigidbody2D _rb;
     SpriteRenderer _renderer;
     Collider2D _collider;
+    Animator _animator;
 
     // Scaling variables
     public float minScale = 0.5f; // Minimum scale at the top of the screen
     public float maxScale = 1.5f; // Maximum scale at the bottom of the screen
     public float topScreenY = 10f; // Y position representing the top of the screen
     public float bottomScreenY = -10f; // Y position representing the bottom of the screen
+    public float animationWaitTime = 0.7f;
 
     // Speed control
     public float speedMultiplier = 0.5f; // Adjust this value to slow down the cameraguys
@@ -28,6 +30,7 @@ public class cameraguys : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
         _collider = GetComponent<Collider2D>();
+        _animator = GetComponent<Animator>();
 
         // Disable rendering and collider initially
         _renderer.enabled = false;
@@ -45,6 +48,7 @@ public class cameraguys : MonoBehaviour
             {
                 _renderer.enabled = true;
                 _collider.enabled = true;
+                StartCoroutine("WaitAndPlayAnimation");
             }
 
             // Move the camera down the screen at a slower speed based on the speed multiplier
@@ -70,5 +74,11 @@ public class cameraguys : MonoBehaviour
     void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    public IEnumerator WaitAndPlayAnimation()
+    {
+        yield return new WaitForSeconds(animationWaitTime);
+        _animator.Play("flashAnimation");
     }
 }

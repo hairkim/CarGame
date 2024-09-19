@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4682346907993507993}
   - component: {fileID: 4033298815670370301}
   - component: {fileID: -2190991022079975452}
+  - component: {fileID: 2492443563975314403}
   m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
@@ -194,5 +195,26 @@ MonoBehaviour:
   maxScale: 1
   topScreenY: 10
   bottomScreenY: -10
-  speedMultiplier: 1.5
+  speedMultiplier: 1
   startDelay: 1
+--- !u!95 &2492443563975314403
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7108020705350217911}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a956cdaed036455ba24dc3d18094b5e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
