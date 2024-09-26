@@ -25,6 +25,11 @@ public class Obstacle : MonoBehaviour
     private float[] lanePositions = { -5.69f, -4.54f, -3.24f, -2.26f }; // X positions of lanes
     private int currentLane;
 
+    private float timeElapsed;
+    public float maxInterval = 1f;
+    public float minInterval = 0.5f;
+    private float delay = 60f;
+
     // Methods
     void Start()
     {
@@ -39,10 +44,13 @@ public class Obstacle : MonoBehaviour
         
         // Set the initial scale
         transform.localScale = new Vector3(initialScale, initialScale, initialScale);
+        timeElapsed = 0;
     }
 
     void Update()
     {
+        //timeElapsed += Time.deltaTime;
+
         // Move the obstacle down the screen
         _rb.velocity = Vector2.down * GameController.speed;
 
@@ -59,28 +67,36 @@ public class Obstacle : MonoBehaviour
         switchTimer -= Time.deltaTime;
         if (switchTimer <= 0)
         {
-            // If on the leftmost side, change lanes to the right
-            if(currentLane == 0)
+            //this should randomly decide if the car will swap lanes or not
+            bool swapLane = Random.Range(0, 2) == 1;
+            if(swapLane)
             {
-                currentLane = Random.Range(0, 2);
-            } 
-            else if(currentLane == (lanePositions.Length - 1))
-            {
-                currentLane = Random.Range(lanePositions.Length - 2, lanePositions.Length);
-            } 
-            else
-            {
-                // Switch to a new lane
-                int newLane = Random.Range(0, 2) * 2 - 1;
-                currentLane = currentLane + newLane;
+                // If on the leftmost side, change lanes to the right
+                if (currentLane == 0)
+                {
+                    currentLane = Random.Range(0, 2);
+                }
+                else if (currentLane == (lanePositions.Length - 1))
+                {
+                    currentLane = Random.Range(lanePositions.Length - 2, lanePositions.Length);
+                }
+                else
+                {
+                    // Switch to a new lane
+                    int newLane = Random.Range(0, 2) * 2 - 1;
+                    currentLane += newLane;
+                }
             }
-
             switchTimer = switchInterval;
         }
 
         // Smoothly move towards the current lane position
         Vector2 targetPosition = new Vector2(lanePositions[currentLane], transform.position.y);
         transform.position = Vector2.MoveTowards(transform.position, targetPosition, laneSwitchSpeed * Time.deltaTime);
+
+        //decrease the interval time so they switch faster
+        //float decreaseIntervalTime = minInterval + ((maxInterval - minInterval) / delay * timeElapsed);
+        //switchInterval = Mathf.Clamp(decreaseIntervalTime, minInterval, maxInterval);
     }
 
     void RandomizeSprite()
