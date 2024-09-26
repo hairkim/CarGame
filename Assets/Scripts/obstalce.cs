@@ -19,8 +19,8 @@ public class Obstacle : MonoBehaviour
     public float bottomScreenY = -10f; // Y position representing the bottom of the screen
 
     // Lane switching variables
-    public float switchInterval = 1f; // Time interval between lane switches
-    public float laneSwitchSpeed = 10f; // Speed of switching lanes
+    public float switchInterval = 2f; // Time interval between lane switches
+    public float laneSwitchSpeed = 1f; // Speed of switching lanes
     private float switchTimer;
     private float[] lanePositions = { -5.69f, -4.54f, -3.24f, -2.26f }; // X positions of lanes
     private int currentLane;
