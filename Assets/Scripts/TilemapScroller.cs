@@ -13,6 +13,7 @@ public class TilemapScroller : MonoBehaviour
     private Vector3 startPosition;
     private float scrollSpeed;
     private float timeElapsed;
+    private float startTime;
 
     public static float currentScrollSpeed;
 
@@ -23,10 +24,13 @@ public class TilemapScroller : MonoBehaviour
 
         // Set initial scroll speed
         scrollSpeed = minScrollSpeed;
+        timeElapsed = 0;
+        startTime = Time.time;
     }
 
     void Update()
     {
+        float inGameTime = Time.time - startTime;
         // Update the time elapsed since the start
         timeElapsed += Time.deltaTime;
 
@@ -35,7 +39,7 @@ public class TilemapScroller : MonoBehaviour
         scrollSpeed = Mathf.Clamp(increaseScrollSpeed, minScrollSpeed, maxScrollSpeed);
 
         // Calculate the new Y position for vertical scrolling
-        float newPositionY = Mathf.Repeat(Time.time * scrollSpeed, tileSize.y + tileYOffset);
+        float newPositionY = Mathf.Repeat(inGameTime * scrollSpeed, tileSize.y + tileYOffset);
         
         // Move the tilemap vertically for scrolling effect
         transform.position = startPosition + Vector3.down * newPositionY;
