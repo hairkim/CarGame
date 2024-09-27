@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIController : MonoBehaviour
@@ -20,8 +21,14 @@ public class UIController : MonoBehaviour
     public GameObject pauseScreen;
     public GameObject gameOverScreen;
 
+    public GameObject startScreenOptions;
     public GameObject newspaperImage;
     public GameObject uiElements;
+    public Sprite newsImage;
+
+    private Animator optionsAnimator;
+    private RectTransform rectTransform;
+    private bool isOptionsOpen;
 
     private float animationDuration = 1.0f; // Duration for the score animation
 
@@ -39,6 +46,10 @@ public class UIController : MonoBehaviour
         }
         else
         {
+            isOptionsOpen = false;
+            optionsAnimator = startScreenOptions.GetComponent<Animator>();
+            rectTransform = startScreenOptions.GetComponent<RectTransform>();
+
             startScreen.SetActive(true);
             pauseScreen.SetActive(false);
             gameOverScreen.SetActive(false);
@@ -98,6 +109,61 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void Options()
+    {
+        if(!isOptionsOpen)
+        {
+            isOptionsOpen = true;
+            Vector2 sizeDelta = rectTransform.sizeDelta;
+            sizeDelta.y = 59f;
+            rectTransform.sizeDelta = sizeDelta;
+            if (optionsAnimator != null)
+            {
+                Debug.Log("playing animation");
+                optionsAnimator.SetTrigger("playOptions");
+            }
+            startScreenOptions.GetComponent<Button>().interactable = false;
+        }
+    }
+
+    public void CloseOptions()
+    {
+        if (isOptionsOpen)
+        {
+            isOptionsOpen = false;
+            if (optionsAnimator != null)
+            {
+                Debug.Log("playing animation");
+                optionsAnimator.SetTrigger("closeOptions");
+                StartCoroutine(WaitForAnimationToEnd(optionsAnimator, "closeOptions"));
+            }
+        }
+    }
+
+
+    private IEnumerator WaitForAnimationToEnd(Animator animator, string animationName)
+    {
+        // Get the current animation clip info to calculate the duration
+        AnimatorStateInfo animatorStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float animationLength = animatorStateInfo.length;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < animationLength)
+        {
+            // We add unscaled delta time to the elapsed time
+            elapsedTime += Time.unscaledDeltaTime;
+
+            yield return null;  // Wait for the next frame
+        }
+
+        // Now execute the rest of the code after the animation has finished
+        Vector2 sizeDelta = rectTransform.sizeDelta;
+        sizeDelta.y = 17f;
+        rectTransform.sizeDelta = sizeDelta;
+        Debug.Log("changed rect transform height");
+        startScreenOptions.GetComponent<Button>().interactable = true;
+    }
+
     public void GameOver()
     {
         // Start the score animation coroutine
@@ -114,6 +180,8 @@ public class UIController : MonoBehaviour
         {
             animator.SetTrigger("ShowNewspaper");
             StartCoroutine(WaitForAnimation(animator, "NewspaperAnimator"));
+
+            newspaperImage.GetComponent<Image>().sprite = newsImage;
         }
 
 
@@ -129,7 +197,6 @@ public class UIController : MonoBehaviour
         {
             yield return null;
         }
-
         uiElements.SetActive(true);
 
         StartCoroutine(AnimateScore(finalScore));
