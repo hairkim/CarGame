@@ -30,6 +30,7 @@ public class UIController : MonoBehaviour
     private RectTransform rectTransform;
     private bool isOptionsOpen;
 
+
     private float animationDuration = 1.0f; // Duration for the score animation
 
     void Start()
@@ -43,6 +44,7 @@ public class UIController : MonoBehaviour
             gameScore.gameObject.SetActive(true);
             Time.timeScale = 1;
             gameStatus = "Playing";
+            AudioController.instance.PlayMusic("InGame");
         }
         else
         {
@@ -57,6 +59,8 @@ public class UIController : MonoBehaviour
             Time.timeScale = 0;
             titleAnimator.Play("titleAnim");
             backgroundAnimator.Play("backgroundAnimation");
+
+            AudioController.instance.PlayMusic("MainMenu");
         }
         Debug.Log("Current high score: " + PlayerPrefs.GetFloat("HighScore", 0f).ToString());
     }
@@ -81,6 +85,8 @@ public class UIController : MonoBehaviour
         startScreen.SetActive(false);
         gameScore.gameObject.SetActive(true);
         gameStatus = "Playing";
+        //AudioController.instance.StopMusic();
+        AudioController.instance.PlayMusic("InGame");
     }
 
     public void PauseGame()
@@ -88,6 +94,7 @@ public class UIController : MonoBehaviour
         Time.timeScale = 0;
         pauseScreen.SetActive(true);
         gameStatus = "Pause";
+        AudioController.instance.PauseMusicAndPlayPauseMenu();
     }
 
     public void ResumeGame()
@@ -95,6 +102,7 @@ public class UIController : MonoBehaviour
         Time.timeScale = 1;
         pauseScreen.SetActive(false);
         gameStatus = "Playing";
+        AudioController.instance.PlayMusic("InGame");
     }
 
     public void RestartGame()
@@ -166,6 +174,8 @@ public class UIController : MonoBehaviour
 
     public void GameOver()
     {
+        //AudioController.instance.StopMusic();
+        AudioController.instance.PlayMusic("GameOver");
         // Start the score animation coroutine
 
         // Display high score immediately
