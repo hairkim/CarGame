@@ -5103,7 +5103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb45d75cede44dc1aced84cde3a0d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minScrollSpeed: 5
+  minScrollSpeed: 4
   maxScrollSpeed: 8
   delay: 60
   tileSize: {x: 8, y: 8}
