@@ -25,6 +25,12 @@ public class UIController : MonoBehaviour
     public GameObject newspaperImage;
     public GameObject uiElements;
     public Sprite newsImage;
+    public GameObject optionsUIElements;
+    public Sprite uncheckedSprite;
+    public Sprite checkedSprite;
+    private bool isSfxButtonPressed = false;
+    private bool isMusicButtonPressed = false;
+    
 
     private Animator optionsAnimator;
     private RectTransform rectTransform;
@@ -35,6 +41,8 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
+
+
         if (gameStatus == "Restart")
         {
             startScreen.SetActive(false);
@@ -72,6 +80,9 @@ public class UIController : MonoBehaviour
             if (gameStatus != "Pause")
             {
                 PauseGame();
+            } else
+            {
+                ResumeGame();
             }
         }
 
@@ -129,8 +140,8 @@ public class UIController : MonoBehaviour
             {
                 Debug.Log("playing animation");
                 optionsAnimator.SetTrigger("playOptions");
+                StartCoroutine(WaitForAnimationToEnd(optionsAnimator, "playOptions"));
             }
-            startScreenOptions.GetComponent<Button>().interactable = false;
         }
     }
 
@@ -138,6 +149,7 @@ public class UIController : MonoBehaviour
     {
         if (isOptionsOpen)
         {
+            optionsUIElements.SetActive(false);
             isOptionsOpen = false;
             if (optionsAnimator != null)
             {
@@ -165,11 +177,18 @@ public class UIController : MonoBehaviour
         }
 
         // Now execute the rest of the code after the animation has finished
-        Vector2 sizeDelta = rectTransform.sizeDelta;
-        sizeDelta.y = 17f;
-        rectTransform.sizeDelta = sizeDelta;
-        Debug.Log("changed rect transform height");
-        startScreenOptions.GetComponent<Button>().interactable = true;
+        if(isOptionsOpen)
+        {
+            startScreenOptions.GetComponent<Button>().interactable = false;
+            optionsUIElements.SetActive(true);
+        } else {
+            Vector2 sizeDelta = rectTransform.sizeDelta;
+            sizeDelta.y = 17f;
+            rectTransform.sizeDelta = sizeDelta;
+            Debug.Log("changed rect transform height");
+            startScreenOptions.GetComponent<Button>().interactable = true;
+        }
+
     }
 
     public void GameOver()
@@ -230,5 +249,32 @@ public class UIController : MonoBehaviour
         // Ensure final score is displayed at the end of the animation
         scoreText.text = Mathf.FloorToInt(finalScore).ToString();
         Time.timeScale = 0;
+    }
+
+    public void sfxButtonPressed(Button button)
+    {
+        isSfxButtonPressed = !isSfxButtonPressed;
+        if(isSfxButtonPressed)
+        {
+            //turn off sfx audio
+            button.image.sprite = checkedSprite;
+        } else
+        {
+            button.image.sprite = uncheckedSprite;
+        }
+    }
+
+    public void MusicButtonPressed(Button button)
+    {
+        isMusicButtonPressed = !isMusicButtonPressed;
+        if (isMusicButtonPressed)
+        {
+            //turn off music audio
+            button.image.sprite = uncheckedSprite;
+        }
+        else
+        {
+            button.image.sprite = checkedSprite;
+        }
     }
 }
