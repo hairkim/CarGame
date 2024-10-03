@@ -1100,7 +1100,7 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: -1496588651, guid: d763b19d0bfdc46ca90d4ea51f3d736f, type: 3}
+    m_PressedSprite: {fileID: 0}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -5907,6 +5907,8 @@ MonoBehaviour:
   uiElements: {fileID: 1679337861}
   newsImage: {fileID: -1967619594, guid: 4da1c219beb49f540a038a62d5947408, type: 3}
   optionsUIElements: {fileID: 457132201}
+  sfxButton: {fileID: 242664948}
+  musicButton: {fileID: 25164419}
   uncheckedSprite: {fileID: 153063278, guid: d763b19d0bfdc46ca90d4ea51f3d736f, type: 3}
   checkedSprite: {fileID: -1496588651, guid: d763b19d0bfdc46ca90d4ea51f3d736f, type: 3}
 --- !u!1 &1948086025
@@ -5920,6 +5922,7 @@ GameObject:
   - component: {fileID: 1948086027}
   - component: {fileID: 1948086026}
   - component: {fileID: 1948086028}
+  - component: {fileID: 1948086029}
   m_Layer: 0
   m_Name: AudioController
   m_TagString: Untagged
@@ -6055,6 +6058,104 @@ MonoBehaviour:
   pauseMenuMusic: {fileID: 8300000, guid: 399cd640ee70a4c748a6d04935127a41, type: 3}
   gameOverMusic: {fileID: 8300000, guid: a25e6d4703c9c4f9495ef7fc1f3ee317, type: 3}
   buttonClickSound: {fileID: 8300000, guid: 2f1a75b1a22f0491d87eaa0c5b89803b, type: 3}
+  audioSource: {fileID: 1948086026}
+  sfxAudioSource: {fileID: 1948086029}
+--- !u!82 &1948086029
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948086025}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1961987481
 GameObject:
   m_ObjectHideFlags: 0
