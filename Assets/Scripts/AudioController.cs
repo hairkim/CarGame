@@ -13,6 +13,7 @@ public class AudioController : MonoBehaviour
     public AudioClip inGameMusic;
     public AudioClip pauseMenuMusic;
     public AudioClip gameOverMusic;
+    public AudioClip buttonClickSound;
 
     private AudioSource audioSource;
 
@@ -98,6 +99,14 @@ public class AudioController : MonoBehaviour
     {
         // Unsubscribe from the sceneLoaded event to avoid memory leaks
         SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void PlayButtonClickSound()
+    {
+        if (buttonClickSound != null)
+        {
+            audioSource.PlayOneShot(buttonClickSound); // Plays click sound effect without interrupting music
+        }
     }
 
     //
