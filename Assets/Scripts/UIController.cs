@@ -26,10 +26,12 @@ public class UIController : MonoBehaviour
     public GameObject uiElements;
     public Sprite newsImage;
     public GameObject optionsUIElements;
+    public Button sfxButton;
+    public Button musicButton;
     public Sprite uncheckedSprite;
     public Sprite checkedSprite;
-    private bool isSfxButtonPressed = false;
-    private bool isMusicButtonPressed = false;
+    private static bool isSfxButtonPressed = false;
+    private static bool isMusicButtonPressed = false;
     
 
     private Animator optionsAnimator;
@@ -41,7 +43,7 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-
+        updateBoxSprite(sfxButton, musicButton);
 
         if (gameStatus == "Restart")
         {
@@ -88,6 +90,7 @@ public class UIController : MonoBehaviour
 
         gameScore.text = Mathf.FloorToInt(GameController.score).ToString();
     }
+
 
     public void StartGame()
     {
@@ -254,14 +257,17 @@ public class UIController : MonoBehaviour
     public void sfxButtonPressed(Button button)
     {
         isSfxButtonPressed = !isSfxButtonPressed;
-        if(isSfxButtonPressed)
+        if (isSfxButtonPressed)
         {
             //turn off sfx audio
-            button.image.sprite = checkedSprite;
-        } else
-        {
             button.image.sprite = uncheckedSprite;
         }
+        else
+        {
+            button.image.sprite = checkedSprite;
+        }
+        AudioController.instance.toggleSfxAudio(isSfxButtonPressed);
+        //updateBoxSprite("sfx", button);
     }
 
     public void MusicButtonPressed(Button button)
@@ -269,12 +275,35 @@ public class UIController : MonoBehaviour
         isMusicButtonPressed = !isMusicButtonPressed;
         if (isMusicButtonPressed)
         {
-            //turn off music audio
             button.image.sprite = uncheckedSprite;
         }
         else
         {
             button.image.sprite = checkedSprite;
+        }
+        AudioController.instance.toggleMusicAudio(isMusicButtonPressed);
+        //updateBoxSprite("Music", button);
+    }
+
+    public void updateBoxSprite(Button sfx, Button music)
+    {
+        if (isSfxButtonPressed)
+        {
+            //turn off sfx audio
+            sfx.image.sprite = uncheckedSprite;
+        }
+        else
+        {
+            sfx.image.sprite = checkedSprite;
+        }
+
+        if (isMusicButtonPressed)
+        {
+            music.image.sprite = uncheckedSprite;
+        }
+        else
+        {
+            music.image.sprite = checkedSprite;
         }
     }
 }

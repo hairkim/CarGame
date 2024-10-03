@@ -15,9 +15,12 @@ public class AudioController : MonoBehaviour
     public AudioClip gameOverMusic;
     public AudioClip buttonClickSound;
 
-    private AudioSource audioSource;
+    public AudioSource audioSource;
+    public AudioSource sfxAudioSource;
 
     private float inGameMusicPosition;
+    private float musicAudioLevel;
+    private float sfxAudioLevel;
 
     void Awake()
     {
@@ -32,8 +35,6 @@ public class AudioController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        audioSource = GetComponent<AudioSource>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -101,11 +102,37 @@ public class AudioController : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    public void toggleMusicAudio(bool isMusicOff)
+    {
+        if(isMusicOff)
+        {
+            musicAudioLevel = audioSource.volume;
+            audioSource.volume = 0;
+        } else
+        {
+            audioSource.volume = musicAudioLevel;
+        }
+    }
+
+    public void toggleSfxAudio(bool isSfxOff)
+    {
+        if (isSfxOff)
+        {
+
+            sfxAudioLevel = sfxAudioSource.volume;
+            sfxAudioSource.volume = 0;
+        }
+        else
+        {
+            sfxAudioSource.volume = sfxAudioLevel;
+        }
+    }
+
     public void PlayButtonClickSound()
     {
         if (buttonClickSound != null)
         {
-            audioSource.PlayOneShot(buttonClickSound); // Plays click sound effect without interrupting music
+            sfxAudioSource.PlayOneShot(buttonClickSound); // Plays click sound effect without interrupting music
         }
     }
 
