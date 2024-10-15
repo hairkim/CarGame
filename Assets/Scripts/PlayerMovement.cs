@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("moveLeft", true);
             moveSpeedLeft = Mathf.Min(moveSpeedLeft + accelerationRate * Time.deltaTime, maxSpeed);
             rb.AddForce(Vector2.left * moveSpeedLeft * Time.deltaTime, ForceMode2D.Impulse);
+            //AudioController.instance.PlaySkrtSound();
         }
         else if(Input.GetKeyUp(KeyCode.A))
         {
@@ -57,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("moveRight", true);
             moveSpeedRight = Mathf.Min(moveSpeedRight + accelerationRate * Time.deltaTime, maxSpeed);
             rb.AddForce(Vector2.right * moveSpeedRight * Time.deltaTime, ForceMode2D.Impulse);
+            //AudioController.instance.PlaySkrtSound();
         }
         else if(Input.GetKeyUp(KeyCode.D))
         {

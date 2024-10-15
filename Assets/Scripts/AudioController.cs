@@ -14,7 +14,12 @@ public class AudioController : MonoBehaviour
     public AudioClip pauseMenuMusic;
     public AudioClip gameOverMusic;
     public AudioClip buttonClickSound;
+    public AudioClip skrtAudio;
+    public AudioClip ambiance;
+    public AudioClip cameraAudio;
+    public AudioClip alertSound;
 
+    public AudioSource ambianceSource;
     public AudioSource audioSource;
     public AudioSource sfxAudioSource;
 
@@ -37,6 +42,8 @@ public class AudioController : MonoBehaviour
         }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+        ambianceSource.clip = ambiance;
+        ambianceSource.Play();
     }
 
     // Method to play different types of music
@@ -134,6 +141,21 @@ public class AudioController : MonoBehaviour
         {
             sfxAudioSource.PlayOneShot(buttonClickSound); // Plays click sound effect without interrupting music
         }
+    }
+
+    public void PlaySkrtSound()
+    {
+        sfxAudioSource.PlayOneShot(skrtAudio, 0.3f);
+    }
+
+    public void PlayCameraSound()
+    {
+        sfxAudioSource.PlayOneShot(cameraAudio, 0.3f);
+    }
+
+    public void PlayAlertSound()
+    {
+        sfxAudioSource.PlayOneShot(alertSound);
     }
 
     //

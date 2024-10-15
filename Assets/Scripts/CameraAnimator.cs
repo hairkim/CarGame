@@ -34,6 +34,7 @@ public class CameraAnimator : MonoBehaviour
             // Play the animation at the selected game object's location
             Debug.Log("setting animation trigger: " + animationName);
             animator.SetTrigger(animationName);
+            AudioController.instance.PlayAlertSound();
 
             // Wait until the animation is done
             while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && !animator.IsInTransition(0))

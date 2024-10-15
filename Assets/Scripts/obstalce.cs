@@ -86,6 +86,7 @@ public class Obstacle : MonoBehaviour
                     int newLane = Random.Range(0, 2) * 2 - 1;
                     currentLane += newLane;
                 }
+                AudioController.instance.PlaySkrtSound();
             }
             switchTimer = switchInterval;
         }
