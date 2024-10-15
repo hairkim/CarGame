@@ -8,15 +8,6 @@ public class CameraAnimator : MonoBehaviour
     public string animationName;
     public GameController gameController;
 
-    //private void Start()
-    //{
-    //    for (int i = 0; i < animationPoint.Length; i++)
-    //    {
-    //        GameObject point = animationPoint[i];
-    //        SpriteRenderer spriteRenderer = point.GetComponent<SpriteRenderer>();
-    //        spriteRenderer.enabled = false;
-    //    }
-    //}
 
 
     public IEnumerator PlayAnimation()

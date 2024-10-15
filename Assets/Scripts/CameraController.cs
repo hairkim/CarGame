@@ -17,7 +17,6 @@ public class CameraController : MonoBehaviour
         uiController = FindObjectOfType<UIController>();
         gameController = FindObjectOfType<GameController>();
     }
-    // Update is called once per frame
     void Update()
     {
 
