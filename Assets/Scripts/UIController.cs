@@ -55,6 +55,8 @@ public class UIController : MonoBehaviour
             Time.timeScale = 1;
             gameStatus = "Playing";
             AudioController.instance.PlayMusic("InGame");
+            GameController.instance.StartCoroutine("CameraSpawnTimer");
+            GameController.instance.StartCoroutine("ObstacleSpawnTimer");
         }
         else
         {
@@ -101,6 +103,8 @@ public class UIController : MonoBehaviour
         gameStatus = "Playing";
         //AudioController.instance.StopMusic();
         AudioController.instance.PlayMusic("InGame");
+        GameController.instance.StartCoroutine("CameraSpawnTimer");
+        GameController.instance.StartCoroutine("ObstacleSpawnTimer");
     }
 
     public void PauseGame()

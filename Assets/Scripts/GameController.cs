@@ -48,8 +48,8 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine("CameraSpawnTimer");
-        StartCoroutine("ObstacleSpawnTimer");
+        //StartCoroutine("CameraSpawnTimer");
+        //StartCoroutine("ObstacleSpawnTimer");
         isCameraShown = false;
         score = 0f;
         UpdateDisplay();
