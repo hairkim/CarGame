@@ -50,7 +50,6 @@ public class cameraguys : MonoBehaviour
                 _collider.enabled = true;
                 StartCoroutine("WaitAndPlayAnimation");
             }
-            // AudioController.instance.PlayCameraSound();
 
             // Move the camera down the screen at a slower speed based on the speed multiplier
             //_rb.velocity = Vector2.down * Mathf.Abs(ScrollingBackground.currentScrollSpeed) * speedMultiplier;
@@ -81,7 +80,5 @@ public class cameraguys : MonoBehaviour
     {
         yield return new WaitForSeconds(animationWaitTime);
         _animator.Play("flashAnimation");
-        AudioController.instance.PlayCameraSound();
-
     }
 }

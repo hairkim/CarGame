@@ -108,6 +108,7 @@ public class GameController : MonoBehaviour
     {
         Transform randomSpawnPoint = cameraSpawnPoints[randomIndex];
         GameObject spawnedCamera = Instantiate(cameraPrefab, randomSpawnPoint.position, Quaternion.identity);
+        StartCoroutine("WaitForCameraSound");
 
         // Assuming you have two spawn points, index 0 is the left side, and index 1 is the right side.
         if (randomIndex == 1) // Right side
@@ -121,6 +122,12 @@ public class GameController : MonoBehaviour
             spawnedCamera.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         isCameraShown = false;
+    }
+
+    IEnumerator WaitForCameraSound()
+    {
+        yield return new WaitForSeconds(1f);
+        AudioController.instance.PlayCameraSound();
     }
 
     IEnumerator CameraSpawnTimer()

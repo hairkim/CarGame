@@ -150,7 +150,7 @@ public class AudioController : MonoBehaviour
 
     public void PlayCameraSound()
     {
-        sfxAudioSource.PlayOneShot(cameraAudio, 0.3f);
+        sfxAudioSource.PlayOneShot(cameraAudio);
     }
 
     public void PlayAlertSound()
