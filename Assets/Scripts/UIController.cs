@@ -107,6 +107,11 @@ public class UIController : MonoBehaviour
         GameController.instance.StartCoroutine("ObstacleSpawnTimer");
     }
 
+    public void ExitApp()
+    {
+        Application.Quit();
+    }
+
     public void PauseGame()
     {
         Time.timeScale = 0;
